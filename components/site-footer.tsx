@@ -9,7 +9,13 @@ export function SiteFooter() {
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:gap-12">
           <div>
-            <BrandLogo className="text-sm tracking-[0.14em] text-[color:var(--fg)]" />
+            <Link
+              href="/"
+              className="inline-flex transition-opacity hover:opacity-85"
+              aria-label="Built for Pros"
+            >
+              <BrandLogo decorative />
+            </Link>
             <p className="mt-3 max-w-md text-sm leading-7 text-[color:var(--faint)]">
               Marketing for contractors who want more calls without the agency
               overhead.

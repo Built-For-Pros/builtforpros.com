@@ -99,8 +99,12 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps = {}) {
     >
       <div className="mx-auto grid h-16 w-full max-w-none grid-cols-[1fr_auto] items-center gap-x-4 px-5 sm:px-8 md:h-[4.5rem] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-8 lg:px-12 xl:px-16">
         <div className="col-start-1 row-start-1 flex items-center gap-2 justify-self-start">
-          <Link href="/" className="transition-opacity hover:opacity-85">
-            <BrandLogo className="text-sm tracking-[0.14em] text-[color:var(--header-fg)] md:text-base lg:text-[1.0625rem]" />
+          <Link
+            href="/"
+            className="transition-opacity hover:opacity-85"
+            aria-label="Built for Pros"
+          >
+            <BrandLogo decorative surface="dark" />
           </Link>
           {isPartner ? null : (
             <button

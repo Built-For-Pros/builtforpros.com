@@ -71,7 +71,7 @@ function ComparisonValue({ value }: { value: PricingComparisonCell }) {
   }
 
   return (
-    <span className="inline-flex rounded-full border border-[color:var(--brand)]/25 bg-[color:var(--brand)]/10 px-2.5 py-1 text-[0.68rem] font-semibold uppercase tracking-wide text-[color:var(--brand)]">
+    <span className="text-xs font-semibold text-[color:var(--brand)]">
       {value}
     </span>
   );

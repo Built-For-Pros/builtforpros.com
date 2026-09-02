@@ -123,6 +123,22 @@
   color-scheme: dark;
 }
 
+.brand-logo-on-dark {
+  display: block;
+}
+
+.brand-logo-on-light {
+  display: none;
+}
+
+:root[data-theme="light"] .brand-logo-on-dark {
+  display: none;
+}
+
+:root[data-theme="light"] .brand-logo-on-light {
+  display: block;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

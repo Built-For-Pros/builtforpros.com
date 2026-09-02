@@ -227,7 +227,7 @@ export const services: ServiceItem[] = [
   {
     title: "City & service area pages",
     description:
-      "Dedicated pages for every town you serve so you show up in more local searches.",
+      "Dedicated pages for your priority service areas so you show up in more local searches.",
     icon: "mapPinned",
   },
   {
@@ -235,12 +235,6 @@ export const services: ServiceItem[] = [
     description:
       "The listing most contractors know they should care about — kept optimized and up to date.",
     icon: "map",
-  },
-  {
-    title: "Call tracking",
-    description:
-      "Know exactly where your leads come from so you can see what's working.",
-    icon: "phoneIncoming",
   },
   {
     title: "Review management",
@@ -295,9 +289,14 @@ export const pricingPlans: PricingPlan[] = [
           "One post per month to your Google listing — a completed job, a seasonal tip, or a service highlight — so your profile stays active and signals a business that's thriving.",
       },
       {
-        label: "Core business listing sync",
+        label: "Google Analytics setup",
         description:
-          "Your name, phone, address, and website kept accurate on Google, Apple Maps, Bing, Yelp, and Facebook so customers never hit outdated info.",
+          "Traffic tracking installed on your site, including basic lead events like form submits and click-to-call, so you can see what's working.",
+      },
+      {
+        label: "Google Search Console setup",
+        description:
+          "Your site connected to Search Console so we can monitor how Google crawls and indexes your pages and catch issues early.",
       },
     ],
   },
@@ -316,6 +315,12 @@ export const pricingPlans: PricingPlan[] = [
           "Dedicated pages like \"Kitchen Remodeling in Beaverton\" or \"Water Heater Repair in Salem\" so Google has a specific page to rank for each town and service you want calls from.",
       },
       {
+        label: "CRM or booking integration",
+        emphasized: true,
+        description:
+          "We connect your job management or booking system—like Jobber, Housecall Pro, ServiceTitan, and similar—so review requests go out automatically after every completed job.",
+      },
+      {
         label: "Automated review request system",
         emphasized: true,
         description:
@@ -328,25 +333,19 @@ export const pricingPlans: PricingPlan[] = [
           "We write and post responses to every new Google review — good or bad — so homeowners see a business that is active, professional, and easy to work with.",
       },
       {
+        label: "Local listing cleanup and buildout",
+        description:
+          "We correct your existing listings and create the missing essentials on Google, Apple Maps, Bing, Yelp, Facebook, Nextdoor, and the major home-service directories so your name, phone, address, and website are accurate wherever homeowners look.",
+      },
+      {
         label: "Monthly project spotlight",
-        emphasized: true,
         description:
-          "We turn one completed job into a short write-up with photos, location, and what was done, then publish it to your site and Google profile so future customers see your actual work.",
-      },
-      {
-        label: "CRM or booking integration",
-        description:
-          "We connect your job management or booking system so review requests go out automatically after every completed job.",
-      },
-      {
-        label: "Home-service directory profiles",
-        description:
-          "Full profiles built out on Angi, Thumbtack, Houzz, Nextdoor, and Porch with your photos, services, and service areas so you show up wherever homeowners are looking.",
+          "We turn one completed job into a short write-up with photos, location, and what was done, then publish it to your site, Google profile, and Facebook so future customers see your actual work.",
       },
       {
         label: "Monthly performance summary",
         description:
-          "A clear report each month covering where your calls came from, how your search rankings moved, what reviews came in, and what we are working on next.",
+          "A clear report each month covering site traffic, how your search rankings moved, what reviews came in, and what we are working on next.",
       },
       { label: "Everything in Foundation" },
     ],
@@ -373,7 +372,7 @@ export const pricingPlans: PricingPlan[] = [
         label: "Custom AI chat widget",
         emphasized: true,
         description:
-          "A custom-trained website assistant built around your services, service area, qualification rules, and intake flow — not a generic plugin — so it can answer job-specific questions, capture structured lead details, and hand off clean follow-up context.",
+          "A custom-trained website assistant built around your services, service area, qualification rules, and intake flow so it can answer job-specific questions, capture structured lead details, and hand off clean follow-up context.",
       },
       {
         label: "Monthly email newsletter",
@@ -396,8 +395,8 @@ export const pricingPlans: PricingPlan[] = [
 ];
 
 export const adsBoltOn: AdsBoltOn = {
-  name: "Professional Ads Management",
-  price: "+$399/mo",
+  name: "Google Ads Management",
+  price: "+$299/mo",
   availability: "Available on any plan",
   summary:
     "Best for businesses that want faster lead flow while SEO builds and prefer hands-off ads management with clear monthly reporting.",
@@ -440,9 +439,9 @@ export const pricingComparisonGroups: PricingComparisonGroup[] = [
     rows: [
       {
         feature: "Custom-built professional website",
-        foundation: true,
-        growth: true,
-        accelerator: true,
+        foundation: "Up to 5 pages",
+        growth: "Up to 8 pages",
+        accelerator: "Up to 15 pages",
       },
       {
         feature: "Managed hosting & maintenance",
@@ -457,19 +456,31 @@ export const pricingComparisonGroups: PricingComparisonGroup[] = [
         accelerator: true,
       },
       {
-        feature: "Google Business Profile setup",
-        foundation: true,
-        growth: true,
-        accelerator: true,
-      },
-      {
         feature: "On-page SEO foundation",
         foundation: true,
         growth: true,
         accelerator: true,
       },
       {
-        feature: "Core business listing sync",
+        feature: "Google Business Profile setup",
+        foundation: true,
+        growth: true,
+        accelerator: true,
+      },
+      {
+        feature: "Monthly Google Business Profile post",
+        foundation: true,
+        growth: true,
+        accelerator: true,
+      },
+      {
+        feature: "Google Analytics setup",
+        foundation: true,
+        growth: true,
+        accelerator: true,
+      },
+      {
+        feature: "Google Search Console setup",
         foundation: true,
         growth: true,
         accelerator: true,
@@ -480,19 +491,13 @@ export const pricingComparisonGroups: PricingComparisonGroup[] = [
     category: "Local SEO & Content",
     rows: [
       {
-        feature: "Monthly Google Business Profile post",
-        foundation: true,
-        growth: true,
-        accelerator: true,
-      },
-      {
         feature: "Monthly project spotlight",
         foundation: false,
         growth: true,
         accelerator: true,
       },
       {
-        feature: "Home-service directory profiles",
+        feature: "Local listing cleanup and buildout",
         foundation: false,
         growth: true,
         accelerator: true,
@@ -509,13 +514,13 @@ export const pricingComparisonGroups: PricingComparisonGroup[] = [
     category: "Reviews & Reputation",
     rows: [
       {
-        feature: "Automated review request system",
+        feature: "CRM or booking integration",
         foundation: false,
         growth: true,
         accelerator: true,
       },
       {
-        feature: "CRM or booking integration",
+        feature: "Automated review request system",
         foundation: false,
         growth: true,
         accelerator: true,
@@ -627,27 +632,32 @@ export const faqItems: FaqItem[] = [
   {
     question: "Do I have to pay for the website upfront?",
     answer:
-      "No. The website is built and included as part of your monthly subscription. No setup fees, no hidden costs.",
-  },
-  {
-    question: "What happens after 12 months?",
-    answer:
-      "Most clients continue on a flexible month-to-month plan. You can also purchase the website outright if you want to go independent.",
+      "No. The website is built and included in your monthly subscription. No setup fees, no hidden costs.",
   },
   {
     question: "Do I own the website?",
     answer:
-      "While you're a subscriber, I build, host, and maintain the site for you. If you leave after your commitment, you have the option to purchase it.",
+      "I build, host, and maintain it while you're a client. Your domain, Google profile, and ad account stay in your name the whole time. Once the twelve months are done — or if you pay the early-exit amount — the site is yours. A full export, free, on request.",
+  },
+  {
+    question: "What happens after 12 months?",
+    answer:
+      "Most clients stay on, month-to-month at the same price, with 30 days' notice to cancel. If you leave after the year, you take the site with you. Nothing extra to buy.",
+  },
+  {
+    question: "What if I want to cancel early?",
+    answer:
+      "The twelve-month term exists because SEO takes time to work. If you cancel during that first year, you owe half of the remaining months, paid as a lump sum. Paying it counts as finishing the term, so you still get your site.",
   },
   {
     question: "How fast will I see results?",
     answer:
-      "Your website goes live within two weeks. SEO usually starts showing traction in three to six months. If you're on Accelerator with ads, you can see leads much faster.",
+      "Your site goes live within two weeks of your materials landing, not two weeks from signing. SEO usually starts showing traction in three to six months. Nobody can promise rankings or a lead count. If you want faster lead flow while that builds, Google Ads Management is an optional add-on on any plan — ad spend is paid directly to Google.",
   },
   {
-    question: "What trades do you work with?",
+    question: "Do I have to run ads?",
     answer:
-      "All of them. Plumbers, electricians, roofers, HVAC, painters, landscapers, handymen, general contractors, remodelers, and more.",
+      "No. Google Ads Management is optional on every plan, at +$299/mo. You can pause or restart it any time. Ad spend is yours, paid straight to Google — I never mark it up or collect it. New Growth and Accelerator clients who aren't already running ads can get the first three months of management free.",
   },
   {
     question: "I already have a website. Can you improve it?",
@@ -655,9 +665,9 @@ export const faqItems: FaqItem[] = [
       "I build a new custom site for every client so I can control the quality, speed, and SEO foundation from day one. Your existing content and branding can still carry over.",
   },
   {
-    question: "What if I want to cancel early?",
+    question: "What trades do you work with?",
     answer:
-      "The 12-month commitment exists because SEO takes time to work. Early cancellation requires a buyout of 50% of the remaining contract value.",
+      "All of them. Plumbers, electricians, roofers, HVAC, painters, landscapers, handymen, general contractors, remodelers, and more.",
   },
   {
     question: "How is this different from other marketing companies?",
