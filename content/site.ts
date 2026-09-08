@@ -1,9 +1,3 @@
-import {
-  DEFAULT_HERO_VARIANT_ID,
-  isHeroVariantId,
-  type HeroVariantId,
-} from "@/lib/hero-test";
-
 export type NavItem = {
   label: string;
   href: `#${string}`;
@@ -80,14 +74,40 @@ export type FaqItem = {
   answer: string;
 };
 
-export type HeroLayout = "split" | "centered";
+export type OutcomeStat = {
+  value: string;
+  label: string;
+  detail: string;
+  icon: "rocket" | "search" | "users";
+};
 
-export type HeroVariant = {
-  id: HeroVariantId;
-  layout: HeroLayout;
-  eyebrow: string;
-  titleLines?: readonly string[];
+export type WhatWeDoPillar = {
+  title: string;
+  label: string;
   description: string;
+  highlights: readonly string[];
+};
+
+export type CaseStudyStat = {
+  value: string;
+  label: string;
+};
+
+export type CaseStudyPreview = {
+  plan: "Foundation" | "Growth" | "Accelerator";
+  company: string;
+  trade: string;
+  market: string;
+  headline: string;
+  summary: string;
+  quote: string;
+  quoteName: string;
+  quoteRole: string;
+  quoteImageUrl: string;
+  quoteImageAlt: string;
+  stats: readonly CaseStudyStat[];
+  imageUrl: string;
+  imageAlt: string;
 };
 
 export const siteConfig = {
@@ -101,41 +121,162 @@ export const siteConfig = {
   primaryCtaHref: "https://cal.com/built-for-pros/free-call",
   heroPrimaryCtaLabel: "Let's Talk Growth",
   heroSecondaryCtaLabel: "Learn more",
-  heroSecondaryCtaHref: "#why-it-matters",
+  heroSecondaryCtaHref: "#what-we-do",
   leadFormSuccess:
     "Got it. I'll be in touch with your free guide and next steps soon.",
 } as const;
 
 export const navItems: NavItem[] = [
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Services", href: "#services" },
+  { label: "What We Do", href: "#what-we-do" },
+  { label: "Results", href: "#case-studies" },
   { label: "Pricing", href: "#pricing" },
   { label: "About", href: "#about" },
   { label: "Free Guide", href: "#lead-magnet" },
   { label: "FAQ", href: "#faq" },
 ];
 
-export const heroVariants = {
-  main: {
-    id: "main",
-    layout: "split",
-    eyebrow: "Contractor Marketing, Simplified",
-    description:
-      "You didn't start your business to learn SEO. We take care of your website, search rankings, reviews, and ads so you can focus on what you do best.",
-  },
-  secondary: {
-    id: "secondary",
-    layout: "centered",
-    eyebrow: "Contractor Marketing, Simplified",
-    titleLines: ["You run the jobsite.", "We run your marketing."],
-    description:
-      "Websites, Google presence, reviews, SEO, and ads handled for you, so the phone keeps ringing while you stay focused on the work.",
-  },
-} satisfies Record<HeroVariantId, HeroVariant>;
+export const hero = {
+  eyebrow: "Contractor Marketing, Simplified",
+  titleLines: ["You run the jobsite.", "We run your marketing."],
+  description:
+    "Websites, Google presence, reviews, SEO, and ads handled for you, so the phone keeps ringing while you stay focused on the work.",
+} as const;
 
-export function getHeroVariant(value: string | null | undefined): HeroVariant {
-  return heroVariants[isHeroVariantId(value) ? value : DEFAULT_HERO_VARIANT_ID];
-}
+export const outcomeStats: OutcomeStat[] = [
+  {
+    value: "2 weeks",
+    label: "Launch speed",
+    detail: "Typical timeline to launch a new conversion-focused site.",
+    icon: "rocket",
+  },
+  {
+    value: "3-6 months",
+    label: "SEO traction",
+    detail: "Common range to see meaningful ranking and visibility movement.",
+    icon: "search",
+  },
+  {
+    value: "Monthly",
+    label: "Optimization cycles",
+    detail: "Continuous updates, tracking, and improvements once live.",
+    icon: "users",
+  },
+];
+
+export const whatWeDoPillars: WhatWeDoPillar[] = [
+  {
+    title: "Website Design + Development",
+    label: "Foundation",
+    description:
+      "We build a conversion-focused site that explains your offer clearly, looks credible, and gets homeowners to call.",
+    highlights: [
+      "Custom design built around your trade and market",
+      "Fast, mobile-first pages with clear CTAs",
+      "Ongoing hosting, updates, and maintenance handled for you",
+    ],
+  },
+  {
+    title: "SEO + Google Presence",
+    label: "Visibility",
+    description:
+      "We make you easier to find when homeowners search your services in your service area.",
+    highlights: [
+      "On-page SEO and service-area page strategy",
+      "Google Business Profile setup and optimization",
+      "Monthly content and listing consistency across directories",
+    ],
+  },
+  {
+    title: "Lead Flow + Conversion Systems",
+    label: "Conversion",
+    description:
+      "We connect the pieces that turn traffic into booked jobs and help you follow up faster.",
+    highlights: [
+      "Call tracking and lead-source visibility",
+      "Review generation and response workflows",
+      "Optional ad and automation systems for faster growth",
+    ],
+  },
+];
+
+export const caseStudiesSection = {
+  eyebrow: "Results",
+  title: "What happens when your marketing actually works.",
+  description:
+    "Three different shops. Three different problems. One needed a site that looked as good as the work. One started getting found for full kitchens. One stopped leaving sold floors on the table.",
+} as const;
+
+export const caseStudyPreviews: CaseStudyPreview[] = [
+  {
+    plan: "Foundation",
+    company: "Valley Tree Decking",
+    trade: "Decking",
+    market: "Los Angeles, CA",
+    headline: "A site that finally looks like the decks he already builds.",
+    summary:
+      "Miguel was sending homeowners to a Facebook page. We built a site that matched the work, so the people requesting estimates were shopping a real deck — not a weekend favor.",
+    quote:
+      "I was sending people to a Facebook page. Now they request an estimate on a real site, and I'm booking the jobs I used to lose.",
+    quoteName: "Miguel Ortega",
+    quoteRole: "Owner-operator",
+    quoteImageUrl: "/case-studies/miguel-ortega-portrait.jpg",
+    quoteImageAlt: "Portrait of Miguel Ortega, owner-operator of Valley Tree Decking",
+    stats: [
+      { value: "$48k", label: "First deck booked" },
+      { value: "2.8x", label: "Average job size" },
+      { value: "7", label: "Inbound estimates / mo" },
+    ],
+    imageUrl: "/case-studies/valley-tree-hero.jpg",
+    imageAlt:
+      "Valley Tree Decking homepage hero with a hillside deck and a free-estimate form",
+  },
+  {
+    plan: "Growth",
+    company: "Millwright Kitchen & Bath",
+    trade: "Kitchen remodeling",
+    market: "Seattle, WA",
+    headline: "Twenty years of work. Then Google finally knew it.",
+    summary:
+      "The work was never the problem. Google just couldn't find them, so the big remodels went to whoever showed up first. Once homeowners could find the shop, the $80k kitchens started calling.",
+    quote:
+      "We've been remodeling kitchens for years. Google just didn't know it. Now I'm walking into $80k jobs instead of $4k patches.",
+    quoteName: "Dan Millwright",
+    quoteRole: "Owner",
+    quoteImageUrl: "/case-studies/dan-millwright-portrait.jpg",
+    quoteImageAlt: "Portrait of Dan Millwright, owner of Millwright Kitchen & Bath",
+    stats: [
+      { value: "+$410k", label: "Additional booked work" },
+      { value: "3.2x", label: "Average job size" },
+      { value: "11.4", label: "Qualified leads / mo" },
+    ],
+    imageUrl: "/case-studies/millwright-hero.jpg",
+    imageAlt:
+      "Millwright Kitchen & Bath homepage hero with a finished Seattle kitchen and request-an-estimate call to action",
+  },
+  {
+    plan: "Accelerator",
+    company: "Lineage Flooring",
+    trade: "Flooring",
+    market: "Chicago, IL",
+    headline: "Same phone volume. More floors they actually installed.",
+    summary:
+      "A busy crew, North Shore jobs, phones ringing — and half those quotes dying in the inbox. Catching the requests they were already earning turned into floors installed, not quotes that went cold.",
+    quote:
+      "The phone always rang. We just weren't catching them. Those missed quotes turned into floors we actually put down.",
+    quoteName: "Chris Hale",
+    quoteRole: "Owner",
+    quoteImageUrl: "/case-studies/chris-delgado-portrait.jpg",
+    quoteImageAlt: "Portrait of Chris Hale, owner of Lineage Flooring",
+    stats: [
+      { value: "+$290k", label: "Recovered booked work" },
+      { value: "+17 pts", label: "Close rate" },
+      { value: "21", label: "Extra floors installed" },
+    ],
+    imageUrl: "/case-studies/lineage-hero.jpg",
+    imageAlt:
+      "Lineage Flooring homepage hero with a Chicago home and a free-quote call to action",
+  },
+];
 
 export const socialProofBrands = [
   "Structura",

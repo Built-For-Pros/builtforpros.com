@@ -24,13 +24,6 @@ Marketing site for **Built for Pros** — subscription-based marketing for contr
 
 ## Getting started
 
-## Local dev ports
-
-- Marketing site: [http://localhost:3000](http://localhost:3000)
-- CRM: [http://localhost:3001](http://localhost:3001)
-
-The marketing app's dev scripts pin this app to port `3000` so it does not collide with the CRM.
-
 ```bash
 npm install
 npm run dev
@@ -63,4 +56,4 @@ This app is a standard Next.js deployment. [Vercel](https://vercel.com) is the t
 
 ## Repository
 
-[github.com/MattCognac/built-for-pros](https://github.com/MattCognac/built-for-pros)
+[github.com/Built-For-Pros/builtforpros.com](https://github.com/Built-For-Pros/builtforpros.com)

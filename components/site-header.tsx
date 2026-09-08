@@ -6,12 +6,6 @@ import { useEffect, useState } from "react";
 
 import { BrandLogo } from "@/components/brand-logo";
 import { navItems, siteConfig } from "@/content/site";
-import {
-  DEFAULT_HERO_VARIANT_ID,
-  HERO_VARIANT_COOKIE,
-  isHeroVariantId,
-  type HeroVariantId,
-} from "@/lib/hero-test";
 
 const GLASS_SCROLL_START = 0.02;
 const GLASS_SCROLL_END = 0.05;
@@ -23,22 +17,6 @@ const desktopNavLinkClassName =
 
 const ctaClassName =
   "inline-flex min-w-0 items-center justify-center gap-2 rounded-full bg-[color:var(--brand)] text-sm font-semibold text-white shadow-[0_1px_0_rgb(0_0_0_/_0.2)] transition hover:bg-[color:var(--brand-strong)]";
-
-function getCookieValue(name: string): string | undefined {
-  return document.cookie
-    .split("; ")
-    .find((cookie) => cookie.startsWith(`${name}=`))
-    ?.split("=")[1];
-}
-
-function getStoredHeroVariant(): HeroVariantId {
-  const value = getCookieValue(HERO_VARIANT_COOKIE);
-  return isHeroVariantId(value) ? value : DEFAULT_HERO_VARIANT_ID;
-}
-
-function getNextHeroVariant(value: HeroVariantId): HeroVariantId {
-  return value === "main" ? "secondary" : "main";
-}
 
 function glassProgress(scrollY: number, viewportHeight: number): number {
   const startPx = viewportHeight * GLASS_SCROLL_START;
@@ -77,15 +55,6 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps = {}) {
     };
   }, []);
 
-  const handleHeroToggle = () => {
-    const nextVariant = getNextHeroVariant(getStoredHeroVariant());
-    const url = new URL(window.location.href);
-    url.pathname = "/";
-    url.searchParams.set("hero", nextVariant);
-    url.hash = "";
-    window.location.assign(url.toString());
-  };
-
   return (
     <header
       className="fixed inset-x-0 top-0 z-50 border-b border-[color:var(--header-border)]"
@@ -106,16 +75,6 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps = {}) {
           >
             <BrandLogo decorative surface="dark" />
           </Link>
-          {isPartner ? null : (
-            <button
-              type="button"
-              onClick={handleHeroToggle}
-              className="rounded-full border border-white/15 bg-white/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/70 transition hover:border-white/30 hover:bg-white/10 hover:text-white"
-              title="Switch hero variant"
-            >
-              Hero
-            </button>
-          )}
         </div>
 
         {isPartner ? null : (

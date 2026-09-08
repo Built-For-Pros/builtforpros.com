@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { siteConfig } from "@/content/site";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
   title: "Terms of Service",
-  description: "Terms of service placeholder for Built for Pros.",
+  description: "Terms for using the Built for Pros website and requesting information about our services.",
   path: "/terms",
 });
 
@@ -19,21 +20,32 @@ export default function TermsPage() {
         <h1 className="mt-4 text-3xl font-semibold tracking-tight text-[color:var(--fg)] sm:text-4xl">
           Terms of Service
         </h1>
+        <p className="mt-3 text-sm text-[color:var(--faint)]">Last updated September 8, 2026</p>
         <div className="mt-8 grid gap-5 text-base leading-8 text-[color:var(--muted)]">
           <p>
-            This is a launch placeholder terms page for Built for Pros. It should be
-            replaced with a final service agreement or public-facing terms page that
-            matches your real contract language before the site goes live.
+            By using {siteConfig.url.replace("https://", "")}, you agree to
+            these terms. The website is provided to describe Built for Pros
+            services and to let you request a guide or book a call.
           </p>
           <p>
-            The website references subscription plans, 12-month commitments, and
-            early cancellation terms. Those details should be reviewed alongside
-            your final legal agreement so the public site stays aligned with the
-            actual client contract.
+            Pricing, plan features, and timelines shown on this site are
+            informational. A paid engagement starts only when both sides sign
+            a separate service agreement. If anything on this site conflicts
+            with that agreement, the signed agreement controls.
           </p>
           <p>
-            If you want, I can turn this into a fuller public terms page after the
-            homepage and design are locked in.
+            Subscription plans are typically billed monthly and include a
+            twelve-month initial term, with early-exit terms described in the
+            FAQ and confirmed in the client agreement. Results such as search
+            rankings or lead volume are not guaranteed.
+          </p>
+          <p>
+            Website content, branding, and design are owned by Built for Pros
+            unless a client agreement says otherwise. Please do not copy the
+            site or present our work as your own.
+          </p>
+          <p>
+            Questions about these terms can be sent to {siteConfig.emailDisplay}.
           </p>
         </div>
         <Link

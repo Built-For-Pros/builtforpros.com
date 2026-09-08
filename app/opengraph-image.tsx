@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { heroVariants, siteConfig } from "@/content/site";
+import { hero, siteConfig } from "@/content/site";
 
 export const alt = "Built for Pros contractor marketing hero preview";
 export const size = {
@@ -9,7 +9,6 @@ export const size = {
 };
 export const contentType = "image/png";
 
-const hero = heroVariants.secondary;
 const heroBackground = new URL("/hero-bg.jpg", siteConfig.url).toString();
 
 export default function OpenGraphImage() {

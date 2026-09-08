@@ -59,6 +59,24 @@
   --about-card-shadow: 0 1px 0 rgb(255 255 255 / 0.04) inset;
   --about-quote-bg: var(--elevated);
   --about-quote-text: var(--muted);
+  --case-study-section-bg: #18181b;
+  --case-study-section-border: rgb(255 255 255 / 0.06);
+  --case-study-card-bg: #222226;
+  --case-study-card-border: rgb(255 255 255 / 0.1);
+  --case-study-card-fg: #fafafa;
+  --case-study-card-muted: #a1a1aa;
+  --case-study-card-image-bg: #2a2a2e;
+  --case-study-card-shadow:
+    0 1px 0 rgb(255 255 255 / 0.06) inset,
+    0 0 0 1px rgb(255 255 255 / 0.04),
+    0 12px 28px rgb(0 0 0 / 0.35),
+    0 32px 56px rgb(0 0 0 / 0.4);
+  --case-study-card-shadow-active:
+    0 1px 0 rgb(255 255 255 / 0.08) inset,
+    0 0 0 1px rgb(255 255 255 / 0.07),
+    0 10px 24px rgb(0 0 0 / 0.35),
+    0 28px 56px rgb(0 0 0 / 0.45),
+    0 56px 100px rgb(0 0 0 / 0.5);
   color-scheme: dark;
 }
 
@@ -116,6 +134,22 @@
   --about-card-shadow: 0 25px 50px -12px rgb(15 23 42 / 0.2);
   --about-quote-bg: #f3f4f6;
   --about-quote-text: #4b5563;
+  --case-study-section-bg: #f3f4f6;
+  --case-study-section-border: #e5e7eb;
+  --case-study-card-bg: #ffffff;
+  --case-study-card-border: #e5e7eb;
+  --case-study-card-fg: #111827;
+  --case-study-card-muted: #4b5563;
+  --case-study-card-image-bg: #e5e7eb;
+  --case-study-card-shadow:
+    0 1px 2px rgb(15 23 42 / 0.05),
+    0 12px 24px rgb(15 23 42 / 0.08),
+    0 28px 48px rgb(15 23 42 / 0.1);
+  --case-study-card-shadow-active:
+    0 1px 2px rgb(15 23 42 / 0.06),
+    0 14px 28px rgb(15 23 42 / 0.1),
+    0 36px 64px rgb(15 23 42 / 0.14),
+    0 56px 96px rgb(15 23 42 / 0.1);
   color-scheme: light;
 }
 
@@ -236,54 +270,6 @@ body {
     animation: marquee 25s linear infinite;
   }
 
-  /* ── Hero lock-screen phone ─────────────────────────────────── */
-
-  @keyframes hero-lock-notif-enter {
-    0% {
-      opacity: 0;
-      transform: translateY(-14px);
-    }
-
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hero-lock-notif-enter {
-    animation: hero-lock-notif-enter 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-
-  @keyframes hero-lock-float {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-
-    50% {
-      transform: translateY(-5px);
-    }
-  }
-
-  .hero-lock-float {
-    animation: hero-lock-float 14s ease-in-out infinite;
-  }
-
-  @keyframes hero-lock-progress {
-    from {
-      transform: scaleX(0);
-    }
-
-    to {
-      transform: scaleX(1);
-    }
-  }
-
-  .hero-lock-progress {
-    animation: hero-lock-progress var(--hero-lock-cycle, 7000ms) linear both;
-    transform-origin: left center;
-  }
-
   .hero-section .scroll-reveal {
     transition-duration: 1.15s !important;
   }
@@ -319,11 +305,46 @@ body {
     transform: none;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero-lock-float,
-    .hero-lock-notif-enter,
-    .hero-lock-progress {
-      animation: none !important;
-    }
-  }
+}
+
+/* ── Case-studies slider ───────────────────────────────────────────── */
+/* Unlayered so these override Swiper's (also unlayered) base styles. */
+
+.case-studies-slider,
+.case-studies-slider .swiper,
+.case-studies-slider .swiper-wrapper,
+.case-studies-slider .swiper-creative .swiper-slide {
+  overflow: visible;
+}
+
+.case-studies-slider .swiper {
+  padding-block: 1rem 1.5rem;
+}
+
+.case-studies-swiper--hidden {
+  position: absolute;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.case-studies-slider.is-ready .case-studies-swiper--visible {
+  position: relative;
+  visibility: visible;
+}
+
+.case-studies-slider .swiper-wrapper {
+  align-items: center;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.case-studies-slider .swiper-slide {
+  display: flex;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.case-studies-slider .swiper-slide > article {
+  width: 100%;
 }
