@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Manrope } from "next/font/google";
 
 import { ThemeProvider } from "@/components/theme-provider";
@@ -46,6 +47,7 @@ export default function RootLayout({
       <body className="min-h-full font-sans">
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <ThemeProvider>{children}</ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
