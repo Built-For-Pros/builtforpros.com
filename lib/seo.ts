@@ -15,7 +15,7 @@ export function createMetadata({
 }: CreateMetadataInput = {}): Metadata {
   const pageTitle = title
     ? `${title} | ${siteConfig.name}`
-    : siteConfig.tagline;
+    : siteConfig.brandLine;
   const url = new URL(path, siteConfig.url);
 
   return {

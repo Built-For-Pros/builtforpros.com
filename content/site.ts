@@ -90,12 +90,15 @@ export type DesignExample = {
   imageAlt: string;
 };
 
+const name = "Built for Pros";
 const tagline = "Contractor marketing, simplified";
+const brandLine = `${name} | ${tagline}`;
 
 export const siteConfig = {
-  name: "Built for Pros",
+  name,
   tagline,
-  description: tagline,
+  brandLine,
+  description: brandLine,
   url: "https://www.builtforpros.com",
   emailDisplay: "hello@builtforpros.com",
   emailHref: "mailto:hello@builtforpros.com",

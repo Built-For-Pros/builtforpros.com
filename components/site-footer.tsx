@@ -17,7 +17,7 @@ export function SiteFooter() {
               <BrandLogo decorative />
             </Link>
             <p className="mt-3 max-w-md text-sm leading-7 text-[color:var(--faint)]">
-              {siteConfig.tagline}.
+              {`${siteConfig.brandLine}.`}
             </p>
           </div>
 
