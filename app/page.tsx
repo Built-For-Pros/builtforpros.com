@@ -1,12 +1,10 @@
-import { AboutSection } from "@/components/sections/about-section";
 import { CaseStudiesPreviewSection } from "@/components/sections/case-studies-preview-section";
 import { FaqSection } from "@/components/sections/faq-section";
 import { FinalCtaSection } from "@/components/sections/final-cta-section";
 import { HeroSection } from "@/components/sections/hero-section";
-import { LeadMagnetSection } from "@/components/sections/lead-magnet-section";
-import { OutcomeStatsSection } from "@/components/sections/outcome-stats-section";
 import { PricingSection } from "@/components/sections/pricing-section";
 import { WhatWeDoSection } from "@/components/sections/what-we-do-section";
+import { WhyItMattersSection } from "@/components/sections/why-it-matters-section";
 import { ScrollAnchorHandler } from "@/components/scroll-anchor-handler";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -25,12 +23,10 @@ export default function Home() {
       <ScrollAnchorHandler />
       <main className="bg-[color:var(--canvas)] text-[color:var(--fg)]">
         <HeroSection />
-        <OutcomeStatsSection />
         <WhatWeDoSection />
+        <WhyItMattersSection />
         <CaseStudiesPreviewSection />
         <PricingSection />
-        <AboutSection />
-        <LeadMagnetSection />
         <FaqSection />
         <FinalCtaSection />
       </main>

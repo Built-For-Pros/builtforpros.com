@@ -6,7 +6,7 @@ import { siteConfig } from "@/content/site";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 const defaultImageSrc =
-  "https://images.unsplash.com/photo-1575839127400-6b9e36bf97f8?auto=format&fit=crop&w=2400&q=80";
+  "/cta-workshop.jpg";
 
 const defaultImageAlt =
   "Assorted tools in a workshop representing hands-on trade expertise";
@@ -20,7 +20,7 @@ const defaultTitle = (
 );
 
 const defaultDescription =
-  "Schedule your free 15-minute growth audit. We'll look at your current presence and show you exactly what's missing from your pipeline.";
+  "In a free 15-minute call, we'll look at your website and Google presence, talk about the work you want more of, and explain where we can help.";
 
 type FinalCtaSectionProps = {
   title?: ReactNode;
@@ -34,7 +34,7 @@ type FinalCtaSectionProps = {
 export function FinalCtaSection({
   title = defaultTitle,
   description = defaultDescription,
-  ctaLabel = "Let's Talk Growth",
+  ctaLabel = "Schedule a Free Call",
   ctaHref = siteConfig.primaryCtaHref,
   imageSrc = defaultImageSrc,
   imageAlt = defaultImageAlt,
@@ -53,16 +53,16 @@ export function FinalCtaSection({
 
       <div className="relative mx-auto max-w-4xl text-center">
         <ScrollReveal>
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-[color:var(--feature-fg)] sm:text-4xl lg:text-5xl">
+          <h2 className="section-title text-[color:var(--feature-fg)]">
             {title}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[color:var(--feature-muted)]">
+          <p className="mx-auto section-intro text-[color:var(--feature-muted)]">
             {description}
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={200}>
-          <div className="mt-10 flex justify-center">
+          <div className="mt-8 flex justify-center">
             <a
               href={ctaHref}
               target="_blank"

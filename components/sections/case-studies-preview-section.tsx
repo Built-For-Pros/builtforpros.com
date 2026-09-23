@@ -1,273 +1,75 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectCreative } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-
-import { SectionHeading } from "@/components/ui/section-heading";
+import { ArrowUpRight } from "lucide-react";
+import { useRef, useState, type KeyboardEvent } from "react";
+import { designExamples } from "@/content/site";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-import {
-  caseStudiesSection,
-  caseStudyPreviews,
-  type CaseStudyPreview,
-} from "@/content/site";
-
-import "swiper/css";
-import "swiper/css/effect-creative";
-
-const CASE_STUDY_CREATIVE_EFFECT = {
-  limitProgress: 1,
-  prev: {
-    translate: ["-22%", 0, -320],
-    scale: 0.9,
-    opacity: 0,
-  },
-  next: {
-    translate: ["22%", 0, -320],
-    scale: 0.9,
-    opacity: 0,
-  },
-};
-
-const CASE_STUDY_CONTENT_MOTION =
-  "transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
-
-function caseStudyCarouselSlides() {
-  const items = caseStudyPreviews;
-  if (items.length === 0) return [];
-  return [...items, ...items, ...items];
-}
-
-function initCaseStudySwiper(swiper: SwiperType) {
-  if (swiper.destroyed || !swiper.params) return;
-  swiper.update();
-  if (swiper.params.loop) {
-    swiper.slideToLoop(0, 0);
-  } else {
-    swiper.slideTo(0, 0);
-  }
-}
-
-function contentMotionClass(isActive: boolean) {
-  return `${CASE_STUDY_CONTENT_MOTION} ${
-    isActive ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
-  }`;
-}
-
-function CaseStudiesCarouselSkeleton() {
-  return (
-    <div className="mx-auto w-full max-w-3xl" aria-hidden>
-      <div className="min-h-[32rem] rounded-2xl border border-[color:var(--case-study-card-border)] bg-[color:var(--case-study-card-bg)] shadow-[var(--case-study-card-shadow)] sm:min-h-[36rem]" />
-    </div>
-  );
-}
-
-const CASE_STUDY_NAV_BUTTON =
-  "inline-flex size-11 items-center justify-center rounded-full border border-[color:var(--case-study-card-border)] bg-[color:var(--case-study-card-bg)] text-[color:var(--case-study-card-fg)] transition hover:border-[color:var(--brand)]/40 hover:text-[color:var(--brand)]";
-
-function CaseStudySlide({
-  study,
-  isActive,
-}: {
-  study: CaseStudyPreview;
-  isActive: boolean;
-}) {
-  return (
-    <article
-      className={`mx-auto w-full max-w-3xl overflow-hidden rounded-2xl border border-[color:var(--case-study-card-border)] bg-[color:var(--case-study-card-bg)] transition-[box-shadow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-        isActive
-          ? "shadow-[var(--case-study-card-shadow-active)]"
-          : "shadow-[var(--case-study-card-shadow)]"
-      }`}
-      aria-hidden={!isActive}
-    >
-      <div
-        className={`bg-[color:var(--case-study-card-image-bg)] ${contentMotionClass(isActive)}`}
-        style={{ transitionDelay: isActive ? "80ms" : "0ms" }}
-      >
-        <Image
-          src={study.imageUrl}
-          alt={study.imageAlt}
-          width={3454}
-          height={1934}
-          quality={95}
-          className="h-auto w-full"
-          sizes="(max-width: 768px) 100vw, 1920px"
-        />
-      </div>
-
-      <div className="border-t border-[color:var(--case-study-card-border)] px-6 py-6 sm:px-8 sm:py-7">
-        <h3
-          className={`text-2xl font-bold leading-tight text-[color:var(--case-study-card-fg)] sm:text-3xl ${contentMotionClass(isActive)}`}
-          style={{ transitionDelay: isActive ? "140ms" : "0ms" }}
-        >
-          {study.company}
-        </h3>
-
-        <blockquote
-          className={`mt-5 border-l-2 border-[color:var(--brand)] pl-4 ${contentMotionClass(isActive)}`}
-          style={{ transitionDelay: isActive ? "180ms" : "0ms" }}
-        >
-          <p className="text-sm leading-relaxed text-[color:var(--case-study-card-muted)] sm:text-[0.94rem]">
-            &ldquo;{study.quote}&rdquo;
-          </p>
-          <footer className="mt-3 flex items-center gap-3">
-            <Image
-              src={study.quoteImageUrl}
-              alt={study.quoteImageAlt}
-              width={40}
-              height={40}
-              quality={90}
-              className="size-10 rounded-full object-cover"
-            />
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-[color:var(--case-study-card-fg)]">
-                {study.quoteName}
-              </p>
-              <p className="text-xs text-[color:var(--case-study-card-muted)]">
-                {study.quoteRole}
-              </p>
-            </div>
-          </footer>
-        </blockquote>
-
-        <dl
-          className={`mt-6 grid grid-cols-3 gap-3 border-t border-[color:var(--case-study-card-border)] pt-5 ${contentMotionClass(isActive)}`}
-          style={{ transitionDelay: isActive ? "260ms" : "0ms" }}
-        >
-          {study.stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <dd className="text-2xl font-bold tabular-nums text-[color:var(--case-study-card-fg)] sm:text-3xl">
-                {stat.value}
-              </dd>
-              <dt className="mt-1 text-[11px] font-medium uppercase tracking-wider text-[color:var(--case-study-card-muted)] sm:text-xs">
-                {stat.label}
-              </dt>
-            </div>
-          ))}
-        </dl>
-      </div>
-    </article>
-  );
-}
 
 export function CaseStudiesPreviewSection() {
-  const swiperRef = useRef<SwiperType | null>(null);
-  const didInitRef = useRef(false);
-  const [isMounted, setIsMounted] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-  const slides = caseStudyCarouselSlides();
+  const [selected, setSelected] = useState(0);
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const handleSwiperInit = useCallback((swiper: SwiperType) => {
-    swiperRef.current = swiper;
-    if (didInitRef.current) return;
-    didInitRef.current = true;
-    initCaseStudySwiper(swiper);
-    setIsReady(true);
-  }, []);
+  function navigate(event: KeyboardEvent<HTMLButtonElement>, index: number) {
+    let next: number;
+    switch (event.key) {
+      case "ArrowRight": next = (index + 1) % designExamples.length; break;
+      case "ArrowLeft": next = (index + designExamples.length - 1) % designExamples.length; break;
+      case "Home": next = 0; break;
+      case "End": next = designExamples.length - 1; break;
+      default: return;
+    }
+    event.preventDefault();
+    setSelected(next);
+    tabRefs.current[next]?.focus();
+  }
 
   return (
-    <section
-      id="case-studies"
-      className="anchor-target section-shell border-t border-[color:var(--case-study-section-border)] bg-[color:var(--case-study-section-bg)]"
-    >
+    <section id="case-studies" className="anchor-target section-shell overflow-hidden bg-[color:var(--canvas)]">
       <div className="content-shell">
         <ScrollReveal>
-          <SectionHeading
-            eyebrow={caseStudiesSection.eyebrow}
-            title={caseStudiesSection.title}
-            description={caseStudiesSection.description}
-            align="center"
-            tone="default"
-          />
+          <div className="mx-auto max-w-3xl text-center">
+            <div>
+              <p className="eyebrow">Our work</p>
+              <h2 className="mt-4 section-title">Your next customer’s first impression.</h2>
+            </div>
+            <p className="mx-auto section-intro text-[color:var(--muted)]">Bold or understated. Modern or traditional. We tailor the photography, typography, and layout to your trade, giving every site a distinct look and feel.</p>
+          </div>
         </ScrollReveal>
 
-        <div
-          className={`case-studies-slider relative mt-12 lg:px-16${isReady ? " is-ready" : ""}`}
-        >
-          {!isReady && <CaseStudiesCarouselSkeleton />}
-
-          {isMounted && (
-            <Swiper
-              className={isReady ? "case-studies-swiper--visible" : "case-studies-swiper--hidden"}
-              modules={[Autoplay, EffectCreative]}
-              effect="creative"
-              creativeEffect={CASE_STUDY_CREATIVE_EFFECT}
-              centeredSlides
-              loop
-              loopAdditionalSlides={caseStudyPreviews.length}
-              observer
-              observeParents
-              resizeObserver
-              speed={800}
-              spaceBetween={32}
-              threshold={12}
-              longSwipesRatio={0.35}
-              slidesPerView={1}
-              watchOverflow={false}
-              autoplay={{ delay: 15000, disableOnInteraction: false, pauseOnMouseEnter: true }}
-              onSwiper={handleSwiperInit}
-              onInit={handleSwiperInit}
-              onResize={initCaseStudySwiper}
+        <div className="mt-12 sm:mt-16 grid grid-cols-3 gap-2 border-b border-[color:var(--border-subtle)] sm:gap-6" role="tablist" aria-label="Website design concepts">
+          {designExamples.map((example, index) => (
+            <button
+              key={example.id}
+              ref={(element) => { tabRefs.current[index] = element; }}
+              type="button"
+              role="tab"
+              id={`design-tab-${example.id}`}
+              aria-controls={`design-panel-${example.id}`}
+              aria-selected={selected === index}
+              tabIndex={selected === index ? 0 : -1}
+              onClick={() => setSelected(index)}
+              onKeyDown={(event) => navigate(event, index)}
+              className={`min-h-20 border-b-2 px-2 py-4 text-center transition sm:px-4 ${selected === index ? "border-[color:var(--brand)] text-[color:var(--fg)]" : "border-transparent text-[color:var(--muted)] hover:text-[color:var(--fg)]"}`}
             >
-              {slides.map((study, index) => (
-                <SwiperSlide key={`${study.company}-${index}`}>
-                  {({ isActive }) => (
-                    <CaseStudySlide study={study} isActive={isActive} />
-                  )}
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          )}
-
-          {isReady && (
-            <>
-              <button
-                type="button"
-                onClick={() => swiperRef.current?.slidePrev()}
-                className={`${CASE_STUDY_NAV_BUTTON} absolute top-1/2 z-10 -translate-y-1/2 shadow-lg max-lg:hidden lg:-left-14`}
-                aria-label="Previous case study"
-              >
-                <ChevronLeft className="size-5" strokeWidth={2} />
-              </button>
-
-              <button
-                type="button"
-                onClick={() => swiperRef.current?.slideNext()}
-                className={`${CASE_STUDY_NAV_BUTTON} absolute top-1/2 z-10 -translate-y-1/2 shadow-lg max-lg:hidden lg:-right-14`}
-                aria-label="Next case study"
-              >
-                <ChevronRight className="size-5" strokeWidth={2} />
-              </button>
-
-              <div className="mt-6 flex items-center justify-center gap-4 lg:hidden">
-                <button
-                  type="button"
-                  onClick={() => swiperRef.current?.slidePrev()}
-                  className={CASE_STUDY_NAV_BUTTON}
-                  aria-label="Previous case study"
-                >
-                  <ChevronLeft className="size-5" strokeWidth={2} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => swiperRef.current?.slideNext()}
-                  className={CASE_STUDY_NAV_BUTTON}
-                  aria-label="Next case study"
-                >
-                  <ChevronRight className="size-5" strokeWidth={2} />
-                </button>
-              </div>
-            </>
-          )}
+              <span className="block text-sm font-semibold sm:text-lg">{example.trade}</span>
+              <span className="mt-1 hidden text-sm text-[color:var(--muted)] sm:block">{example.name}</span>
+            </button>
+          ))}
         </div>
+
+        {designExamples.map((example, index) => (
+          <div key={example.id} role="tabpanel" id={`design-panel-${example.id}`} aria-labelledby={`design-tab-${example.id}`} hidden={selected !== index} tabIndex={0} className="mt-8">
+            <figure>
+              <div className="overflow-hidden rounded-xl border border-[color:var(--border-subtle)] bg-[color:var(--elevated)] shadow-[var(--shadow-soft)]">
+                <Image src={example.imageUrl} alt={example.imageAlt} width={3454} height={example.id === "lineage" ? 1936 : 1934} quality={95} className="h-auto w-full" sizes="(max-width: 1200px) 100vw, 1152px" />
+              </div>
+              <figcaption className="flex justify-center pt-6">
+                <a href={example.imageUrl} target="_blank" rel="noreferrer" className="inline-flex min-h-11 shrink-0 items-center gap-2 text-sm font-semibold transition hover:text-[color:var(--brand)]" aria-label={`View ${example.name} design at full size (opens in a new tab)`}>View full size <ArrowUpRight className="size-4" aria-hidden /></a>
+              </figcaption>
+            </figure>
+          </div>
+        ))}
       </div>
     </section>
   );

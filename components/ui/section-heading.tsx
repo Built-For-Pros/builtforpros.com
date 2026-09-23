@@ -23,11 +23,11 @@ export function SectionHeading({
   return (
     <div className={alignment}>
       {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-      <h2 className={`mt-3 text-balance text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl ${titleColor}`}>
+      <h2 className={`section-title ${eyebrow ? "mt-4" : ""} ${titleColor}`}>
         {title}
       </h2>
       {description ? (
-        <p className={`mt-4 text-pretty text-lg leading-8 ${descriptionColor}`}>{description}</p>
+        <p className={`section-intro ${align === "center" ? "mx-auto" : ""} ${descriptionColor}`}>{description}</p>
       ) : null}
     </div>
   );

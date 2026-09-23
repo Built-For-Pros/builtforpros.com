@@ -307,16 +307,16 @@ export function PricingDetailsActions() {
         <div id={addOnsId}>{showAddOns ? <AdsAddOnCard /> : null}</div>
       </div>
 
-      <p className="mx-auto mt-5 max-w-2xl text-center text-sm leading-7 text-[color:var(--feature-faint)]">
+      <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-7 text-[color:var(--feature-faint)]">
         12-month commitment, no setup fees. Month-to-month after the first year.
         Most clients see their plan pay for itself with a single job.
       </p>
 
-      <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+      <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
         <button
           type="button"
           onClick={() => setIsCompareOpen(true)}
-          className="inline-flex w-full items-center justify-center rounded-full border border-[color:var(--feature-border-hover)] px-6 py-3 text-sm font-semibold text-[color:var(--feature-fg)] transition hover:border-[color:var(--brand)]/35 hover:bg-[color:var(--feature-elevated-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand)]/40 sm:w-auto"
+          className="inline-flex min-h-12 w-full items-center justify-center rounded-full border border-[color:var(--feature-border-hover)] px-6 py-3 text-sm font-semibold text-[color:var(--feature-fg)] transition hover:border-[color:var(--brand)]/35 hover:bg-[color:var(--feature-elevated-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand)]/40 sm:w-auto"
         >
           Compare plans
         </button>
@@ -324,7 +324,7 @@ export function PricingDetailsActions() {
           href={siteConfig.primaryCtaHref}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--brand)] px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_rgb(0_0_0_/_0.12)] transition hover:bg-[color:var(--brand-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand)]/40 sm:w-auto"
+          className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[color:var(--brand)] px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_rgb(0_0_0_/_0.12)] transition hover:bg-[color:var(--brand-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--brand)]/40 sm:w-auto"
         >
           {siteConfig.primaryCtaLabel}
           <ArrowRight className="size-4" strokeWidth={2} aria-hidden="true" />

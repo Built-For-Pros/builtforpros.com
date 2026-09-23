@@ -1,111 +1,31 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-
+import { ArrowUpRight } from "lucide-react";
 import { founderStory, siteConfig } from "@/content/site";
-import { SectionHeading } from "@/components/ui/section-heading";
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
-
-const stats = [
-  { value: "10+", label: "Years in the trades" },
-  { value: "100%", label: "Hands-on, every client" },
-  { value: "24/7", label: "Site monitoring" },
-] as const;
-
-const aboutHighlights = [
-  "You work directly with me.",
-  "Professional from day one.",
-  "Designed to stay simple on your side.",
-] as const;
 
 export function AboutSection() {
   return (
-    <section
-      id="about"
-      className="anchor-target section-shell border-t border-[color:var(--border-subtle)]"
-    >
-      <div className="content-shell">
-        <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-start">
-          <ScrollReveal animation="fade-left">
-            <div>
-              <SectionHeading
-                eyebrow="About"
-                title={
-                  <>
-                    The &ldquo;Built for Pros&rdquo;
-                    <br />
-                    Mission
-                  </>
-                }
-              />
-
-              <div className="mt-8 grid gap-5 text-lg leading-8 text-[color:var(--muted)]">
-                {founderStory.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
-              </div>
-
-              <blockquote className="mt-8 rounded-r-xl border-l-2 border-[color:var(--brand)] bg-[color:var(--about-quote-bg)] py-4 pl-5 pr-5 text-base italic leading-7 text-[color:var(--about-quote-text)]">
-                &ldquo;The good contractors don&rsquo;t need another agency.
-                They need one person who gets it and handles the whole
-                thing.&rdquo;
-              </blockquote>
-
-              <div className="mt-10 grid grid-cols-3 gap-6 border-t border-[color:var(--border-subtle)] pt-10">
-                {stats.map((stat) => (
-                  <div key={stat.label}>
-                    <p className="text-2xl font-bold tabular-nums text-[color:var(--fg)]">
-                      {stat.value}
-                    </p>
-                    <p className="mt-1 text-xs font-medium uppercase tracking-wider text-[color:var(--faint)]">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
+    <section id="about" className="anchor-target section-shell border-y border-[color:var(--border-subtle)] bg-[color:var(--canvas-soft)]">
+      <div className="content-shell grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-20">
+        <ScrollReveal>
+          <figure className="mx-auto max-w-md lg:max-w-none">
+            <div className="overflow-hidden rounded-2xl bg-[color:var(--elevated)]">
+              <Image src="/founder.png" alt="Matt, founder of Built for Pros" width={1024} height={1024} className="aspect-[4/5] w-full object-cover" sizes="(max-width: 1024px) 448px, 430px" />
             </div>
-          </ScrollReveal>
-
-          <ScrollReveal animation="fade-right" delay={150}>
-            <aside className="overflow-hidden rounded-2xl border border-[color:var(--about-card-border)] bg-[color:var(--about-card-bg)] shadow-[var(--about-card-shadow)]">
-              <div className="aspect-[4/3] overflow-hidden">
-                <Image
-                  src="/founder.png"
-                  alt="Matt Hennessy, founder of Built for Pros"
-                  width={576}
-                  height={576}
-                  className="size-full object-cover"
-                  priority={false}
-                />
-              </div>
-
-              <div className="p-7">
-                <p className="eyebrow">
-                  Why it works
-                </p>
-                <div className="mt-5 grid gap-4">
-                  {aboutHighlights.map((item) => (
-                    <p
-                      key={item}
-                      className="border-l-2 border-[color:var(--brand)]/80 pl-4 text-sm leading-6 text-[color:var(--about-card-muted)]"
-                    >
-                      {item}
-                    </p>
-                  ))}
-                </div>
-
-                <a
-                  href={siteConfig.primaryCtaHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--brand)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[color:var(--brand-strong)]"
-                >
-                  {siteConfig.primaryCtaLabel}
-                  <ArrowRight className="size-4" strokeWidth={2} />
-                </a>
-              </div>
-            </aside>
-          </ScrollReveal>
-        </div>
+          </figure>
+        </ScrollReveal>
+        <ScrollReveal delay={100}>
+          <p className="eyebrow">About Built for Pros</p>
+          <h2 className="mt-4 max-w-xl section-title">Built by someone<br className="hidden sm:block" /> who’s done the work.</h2>
+          <div className="section-intro space-y-4 text-[color:var(--muted)]">
+            {founderStory.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
+          <div className="mt-8 grid gap-6 border-y border-[color:var(--border-subtle)] py-6 sm:grid-cols-2">
+            <div><p className="text-2xl font-bold">10+ years</p><p className="mt-2 text-sm leading-6 text-[color:var(--muted)]">Hands-on experience in the trades</p></div>
+            <div><p className="text-lg font-semibold">Google UX Design</p><p className="mt-2 text-sm leading-6 text-[color:var(--muted)]">Professional Certificates</p></div>
+          </div>
+          <a href={siteConfig.primaryCtaHref} target="_blank" rel="noreferrer" className="mt-8 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[color:var(--brand)] px-7 py-3 text-center text-sm font-bold text-white shadow-[0_2px_0_rgb(0_0_0_/_0.15)] transition hover:bg-[color:var(--brand-strong)] active:translate-y-px sm:w-auto sm:px-8">Let’s talk about your business <ArrowUpRight className="size-4 shrink-0" aria-hidden /></a>
+        </ScrollReveal>
       </div>
     </section>
   );

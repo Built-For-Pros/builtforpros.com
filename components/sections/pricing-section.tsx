@@ -22,11 +22,11 @@ export function PricingSection() {
           />
         </ScrollReveal>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-12 sm:mt-16 grid gap-8 lg:grid-cols-3">
           {pricingPlans.map((plan, index) => (
             <ScrollReveal key={plan.name} delay={index * 120} className="[&:has(.group:hover)]:z-10 [&:has(.group:focus-within)]:z-10">
               <div
-                className={`flex h-full flex-col rounded-2xl p-7 sm:p-8 ${
+                className={`flex h-full flex-col rounded-2xl p-6 sm:p-8 ${
                   plan.featured
                     ? "relative border border-[color:var(--brand)]/35 bg-[color:var(--pricing-featured-bg)] text-[color:var(--pricing-featured-fg)] shadow-[0_0_0_1px_rgb(249_99_2_/_0.12),var(--shadow-soft)]"
                     : "border border-[color:var(--pricing-card-border)] bg-[color:var(--pricing-card-bg)] text-[color:var(--pricing-card-fg)] shadow-[0_1px_0_rgb(255_255_255_/_0.04)_inset]"
@@ -69,18 +69,18 @@ export function PricingSection() {
                 <p
                   className={
                     plan.featured
-                      ? "mt-4 text-sm leading-6 text-[color:var(--pricing-featured-muted)]"
-                      : "mt-4 text-sm leading-6 text-[color:var(--pricing-card-muted)]"
+                      ? "mt-4 text-base leading-7 text-[color:var(--pricing-featured-muted)]"
+                      : "mt-4 text-base leading-7 text-[color:var(--pricing-card-muted)]"
                   }
                 >
                   {plan.summary}
                 </p>
 
-                <ul className="mt-6 grid gap-2.5">
+                <ul className="mt-6 grid gap-3">
                   {plan.features.map((feature) => (
                     <li
                       key={feature.label}
-                      className={`flex items-start gap-2 text-sm leading-6 ${
+                      className={`relative flex items-start gap-2 text-sm leading-6 ${
                         plan.featured
                           ? "text-[color:var(--pricing-featured-muted)]"
                           : "text-[color:var(--pricing-card-muted)]"
@@ -102,7 +102,7 @@ export function PricingSection() {
                           {feature.label}
                         </span>
                         {feature.description ? (
-                          <span className="group relative ml-1.5 inline-flex align-middle">
+                          <span className="group ml-1.5 inline-flex align-middle">
                             <button
                               type="button"
                               aria-label={`More about ${feature.label}`}
@@ -114,7 +114,7 @@ export function PricingSection() {
                                 aria-hidden="true"
                               />
                             </button>
-                            <span className="invisible absolute bottom-full left-1/2 z-50 mb-2 w-80 max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-lg border border-[color:var(--feature-border-subtle)] bg-[color:var(--feature-elevated-strong)] px-3 py-2 text-xs font-normal leading-5 text-[color:var(--feature-fg)] opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                            <span className="invisible absolute bottom-full left-1/2 z-50 mb-2 w-full max-w-sm -translate-x-1/2 rounded-lg border border-[color:var(--feature-border-subtle)] bg-[color:var(--feature-elevated-strong)] px-3 py-2 text-xs font-normal leading-5 text-[color:var(--feature-fg)] opacity-0 shadow-lg transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
                               {feature.description}
                             </span>
                           </span>
@@ -129,7 +129,7 @@ export function PricingSection() {
                     href={siteConfig.primaryCtaHref}
                     target="_blank"
                     rel="noreferrer"
-                    className={`inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition ${
+                    className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition ${
                       plan.featured
                         ? "bg-[color:var(--brand)] text-white shadow-[0_2px_0_rgb(0_0_0_/_0.12)] hover:bg-[color:var(--brand-strong)]"
                         : "border border-[color:var(--feature-border-hover)] text-[color:var(--feature-fg)] hover:border-[color:var(--brand)]/35 hover:bg-[color:var(--feature-elevated-strong)]"

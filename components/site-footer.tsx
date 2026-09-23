@@ -17,8 +17,7 @@ export function SiteFooter() {
               <BrandLogo decorative />
             </Link>
             <p className="mt-3 max-w-md text-sm leading-7 text-[color:var(--faint)]">
-              Marketing for contractors who want more calls without the agency
-              overhead.
+              {siteConfig.tagline}.
             </p>
           </div>
 

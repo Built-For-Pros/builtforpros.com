@@ -66,7 +66,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps = {}) {
         WebkitBackdropFilter: `blur(${18 * p}px) saturate(${100 + 40 * p}%)`,
       }}
     >
-      <div className="mx-auto grid h-16 w-full max-w-none grid-cols-[1fr_auto] items-center gap-x-4 px-5 sm:px-8 md:h-[4.5rem] md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-x-8 lg:px-12 xl:px-16">
+      <div className="mx-auto grid h-16 w-full max-w-none grid-cols-[1fr_auto] items-center gap-x-4 px-5 sm:px-8 md:h-[4.5rem] xl:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] xl:gap-x-8 lg:px-12 xl:px-16">
         <div className="col-start-1 row-start-1 flex items-center gap-2 justify-self-start">
           <Link
             href="/"
@@ -78,7 +78,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps = {}) {
         </div>
 
         {isPartner ? null : (
-          <nav className="col-start-2 row-start-1 hidden min-w-0 items-center justify-center gap-0.5 md:flex lg:gap-2">
+          <nav className="col-start-2 row-start-1 hidden min-w-0 items-center justify-center gap-0.5 xl:flex xl:gap-2">
             {navItems.map((item) => (
               <a key={item.href} href={item.href} className={desktopNavLinkClassName}>
                 {item.label}
@@ -87,7 +87,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps = {}) {
           </nav>
         )}
 
-        <div className="col-start-3 row-start-1 hidden justify-self-end md:block">
+        <div className="col-start-3 row-start-1 hidden justify-self-end xl:block">
           <a
             href={siteConfig.primaryCtaHref}
             target="_blank"
@@ -99,7 +99,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps = {}) {
           </a>
         </div>
 
-        <div className="col-start-2 row-start-1 flex items-center justify-self-end md:hidden">
+        <div className="col-start-2 row-start-1 flex items-center justify-self-end xl:hidden">
           {isPartner ? (
             <a
               href={siteConfig.primaryCtaHref}
@@ -123,6 +123,7 @@ export function SiteHeader({ variant = "default" }: SiteHeaderProps = {}) {
                     <a
                       key={item.href}
                       href={item.href}
+                      onClick={(event) => { event.currentTarget.closest("details")?.removeAttribute("open"); }}
                       className="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-300 transition hover:bg-white/5 hover:text-white"
                     >
                       {item.label}

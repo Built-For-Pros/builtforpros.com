@@ -81,39 +81,21 @@ export type OutcomeStat = {
   icon: "rocket" | "search" | "users";
 };
 
-export type WhatWeDoPillar = {
-  title: string;
-  label: string;
-  description: string;
-  highlights: readonly string[];
-};
-
-export type CaseStudyStat = {
-  value: string;
-  label: string;
-};
-
-export type CaseStudyPreview = {
-  plan: "Foundation" | "Growth" | "Accelerator";
-  company: string;
+export type DesignExample = {
+  id: string;
+  name: string;
   trade: string;
-  market: string;
-  headline: string;
-  summary: string;
-  quote: string;
-  quoteName: string;
-  quoteRole: string;
-  quoteImageUrl: string;
-  quoteImageAlt: string;
-  stats: readonly CaseStudyStat[];
+  description: string;
   imageUrl: string;
   imageAlt: string;
 };
 
+const tagline = "Contractor marketing, simplified";
+
 export const siteConfig = {
   name: "Built for Pros",
-  description:
-    "Subscription-based marketing for contractors and home service businesses. Custom websites, SEO, Google presence, reviews, and ads handled for you.",
+  tagline,
+  description: tagline,
   url: "https://www.builtforpros.com",
   emailDisplay: "hello@builtforpros.com",
   emailHref: "mailto:hello@builtforpros.com",
@@ -128,18 +110,16 @@ export const siteConfig = {
 
 export const navItems: NavItem[] = [
   { label: "What We Do", href: "#what-we-do" },
-  { label: "Results", href: "#case-studies" },
+  { label: "Our Work", href: "#case-studies" },
   { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
-  { label: "Free Guide", href: "#lead-magnet" },
   { label: "FAQ", href: "#faq" },
 ];
 
 export const hero = {
-  eyebrow: "Contractor Marketing, Simplified",
+  eyebrow: siteConfig.tagline,
   titleLines: ["You run the jobsite.", "We run your marketing."],
   description:
-    "Websites, Google presence, reviews, SEO, and ads handled for you, so the phone keeps ringing while you stay focused on the work.",
+    "We rebuild your website, strengthen your Google presence, and keep it all working so more of the right customers can find you.",
 } as const;
 
 export const outcomeStats: OutcomeStat[] = [
@@ -163,161 +143,32 @@ export const outcomeStats: OutcomeStat[] = [
   },
 ];
 
-export const whatWeDoPillars: WhatWeDoPillar[] = [
+export const designExamples: DesignExample[] = [
   {
-    title: "Website Design + Development",
-    label: "Foundation",
-    description:
-      "We build a conversion-focused site that explains your offer clearly, looks credible, and gets homeowners to call.",
-    highlights: [
-      "Custom design built around your trade and market",
-      "Fast, mobile-first pages with clear CTAs",
-      "Ongoing hosting, updates, and maintenance handled for you",
-    ],
-  },
-  {
-    title: "SEO + Google Presence",
-    label: "Visibility",
-    description:
-      "We make you easier to find when homeowners search your services in your service area.",
-    highlights: [
-      "On-page SEO and service-area page strategy",
-      "Google Business Profile setup and optimization",
-      "Monthly content and listing consistency across directories",
-    ],
-  },
-  {
-    title: "Lead Flow + Conversion Systems",
-    label: "Conversion",
-    description:
-      "We connect the pieces that turn traffic into booked jobs and help you follow up faster.",
-    highlights: [
-      "Call tracking and lead-source visibility",
-      "Review generation and response workflows",
-      "Optional ad and automation systems for faster growth",
-    ],
-  },
-];
-
-export const caseStudiesSection = {
-  eyebrow: "Results",
-  title: "What happens when your marketing actually works.",
-  description:
-    "Three different shops. Three different problems. One needed a site that looked as good as the work. One started getting found for full kitchens. One stopped leaving sold floors on the table.",
-} as const;
-
-export const caseStudyPreviews: CaseStudyPreview[] = [
-  {
-    plan: "Foundation",
-    company: "Valley Tree Decking",
-    trade: "Decking",
-    market: "Los Angeles, CA",
-    headline: "A site that finally looks like the decks he already builds.",
-    summary:
-      "Miguel was sending homeowners to a Facebook page. We built a site that matched the work, so the people requesting estimates were shopping a real deck — not a weekend favor.",
-    quote:
-      "I was sending people to a Facebook page. Now they request an estimate on a real site, and I'm booking the jobs I used to lose.",
-    quoteName: "Miguel Ortega",
-    quoteRole: "Owner-operator",
-    quoteImageUrl: "/case-studies/miguel-ortega-portrait.jpg",
-    quoteImageAlt: "Portrait of Miguel Ortega, owner-operator of Valley Tree Decking",
-    stats: [
-      { value: "$48k", label: "First deck booked" },
-      { value: "2.8x", label: "Average job size" },
-      { value: "7", label: "Inbound estimates / mo" },
-    ],
-    imageUrl: "/case-studies/valley-tree-hero.jpg",
-    imageAlt:
-      "Valley Tree Decking homepage hero with a hillside deck and a free-estimate form",
-  },
-  {
-    plan: "Growth",
-    company: "Millwright Kitchen & Bath",
-    trade: "Kitchen remodeling",
-    market: "Seattle, WA",
-    headline: "Twenty years of work. Then Google finally knew it.",
-    summary:
-      "The work was never the problem. Google just couldn't find them, so the big remodels went to whoever showed up first. Once homeowners could find the shop, the $80k kitchens started calling.",
-    quote:
-      "We've been remodeling kitchens for years. Google just didn't know it. Now I'm walking into $80k jobs instead of $4k patches.",
-    quoteName: "Dan Millwright",
-    quoteRole: "Owner",
-    quoteImageUrl: "/case-studies/dan-millwright-portrait.jpg",
-    quoteImageAlt: "Portrait of Dan Millwright, owner of Millwright Kitchen & Bath",
-    stats: [
-      { value: "+$410k", label: "Additional booked work" },
-      { value: "3.2x", label: "Average job size" },
-      { value: "11.4", label: "Qualified leads / mo" },
-    ],
+    id: "millwright",
+    name: "Millwright Kitchen & Bath",
+    trade: "Remodeling",
+    description: "A refined layout that gives the finished work room to speak, with a clear invitation to request an estimate.",
     imageUrl: "/case-studies/millwright-hero.jpg",
-    imageAlt:
-      "Millwright Kitchen & Bath homepage hero with a finished Seattle kitchen and request-an-estimate call to action",
+    imageAlt: "Concept homepage for Millwright Kitchen and Bath, featuring a finished kitchen, large serif typography, and an estimate button",
   },
   {
-    plan: "Accelerator",
-    company: "Lineage Flooring",
+    id: "valley-tree",
+    name: "Valley Tree Decking",
+    trade: "Decking",
+    description: "Warm project photography paired with a straightforward estimate form, putting the next step right beside the work.",
+    imageUrl: "/case-studies/valley-tree-hero.jpg",
+    imageAlt: "Concept homepage for Valley Tree Decking, featuring a hillside deck and an estimate request form",
+  },
+  {
+    id: "lineage",
+    name: "Lineage Flooring",
     trade: "Flooring",
-    market: "Chicago, IL",
-    headline: "Same phone volume. More floors they actually installed.",
-    summary:
-      "A busy crew, North Shore jobs, phones ringing — and half those quotes dying in the inbox. Catching the requests they were already earning turned into floors installed, not quotes that went cold.",
-    quote:
-      "The phone always rang. We just weren't catching them. Those missed quotes turned into floors we actually put down.",
-    quoteName: "Chris Hale",
-    quoteRole: "Owner",
-    quoteImageUrl: "/case-studies/chris-delgado-portrait.jpg",
-    quoteImageAlt: "Portrait of Chris Hale, owner of Lineage Flooring",
-    stats: [
-      { value: "+$290k", label: "Recovered booked work" },
-      { value: "+17 pts", label: "Close rate" },
-      { value: "21", label: "Extra floors installed" },
-    ],
+    description: "A restrained black-and-white direction with architectural photography, spacious type, and a prominent quote request.",
     imageUrl: "/case-studies/lineage-hero.jpg",
-    imageAlt:
-      "Lineage Flooring homepage hero with a Chicago home and a free-quote call to action",
+    imageAlt: "Concept homepage for Lineage Flooring, featuring monochrome architectural photography and a quote button",
   },
 ];
-
-export const socialProofBrands = [
-  "Structura",
-  "Forge_Co",
-  "Iron&Oak",
-  "Apex_Build",
-  "Core_Site",
-] as const;
-
-export const whyItMatters = {
-  eyebrow: "Why it matters",
-  title: "Your next customer is searching for you.",
-  paragraphs: [
-    "Most homeowners start with a Google search. If your site, your reviews, or your profile aren't working for you, that call goes to someone else. We make sure it doesn't.",
-  ],
-  /**
-   * Sources:
-   * 75% — Stanford Web Credibility Research + PR Newswire survey 2024 (website credibility)
-   * 5× — WebFX / Lead Oracle GBP benchmarks 2026 (optimized vs unmanaged profiles)
-   * 60% — SEOSandwich agency vs in-house SEO comparison 2024 (outsourced ROI)
-   * 35% — Opensend review response rate statistics 2024 (review revenue impact)
-   */
-  stats: [
-    {
-      value: "75%",
-      label: "of consumers judge a business's credibility by its website alone",
-    },
-    {
-      value: "5×",
-      label: "more calls from optimized Google profiles vs. unmanaged ones",
-    },
-    {
-      value: "60%",
-      label: "higher ROI from outsourced marketing vs. doing it yourself",
-    },
-    {
-      value: "35%",
-      label: "more revenue for businesses that actively manage their reviews",
-    },
-  ],
-} as const;
 
 export const processSteps: ProcessStep[] = [
   {
@@ -758,9 +609,9 @@ export const pricingComparisonGroups: PricingComparisonGroup[] = [
 ];
 
 export const founderStory = [
-  "I spent more than a decade working in the trades — handyman work, building maintenance, contractor environments where word of mouth was everything.",
-  "I saw a lot of good contractors get stuck with bad websites, confusing marketing, or agencies that talked a big game without understanding how the business actually works.",
-  "Built for Pros exists to make that simple. You talk to me once, I build the system, and your marketing gets handled without turning into another job.",
+  "Hey, I'm Matt, and I've spent more than a decade in the trades running my own business. I know what it takes to earn a customer's trust, and how little time is left for marketing at the end of the day.",
+  "I started Built for Pros to help established contractors whose online presence hasn't kept up with their business. I bring that trades experience together with formal UX design training to build websites that look professional and are easy for customers to use.",
+  "You work directly with me, from the first conversation to the ongoing updates. I learn your business, build what it needs, and stay involved after launch.",
 ] as const;
 
 export const leadMagnet = {
@@ -770,6 +621,11 @@ export const leadMagnet = {
 } as const;
 
 export const faqItems: FaqItem[] = [
+  {
+    question: "Can you help my business show up in AI search?",
+    answer:
+      "We make your services, locations, and business information clear and accessible to search tools, including AI-powered search. That means useful content, a technically sound website, and consistent business details. These give search tools better information to work with; no one can guarantee that an AI answer will recommend a particular business.",
+  },
   {
     question: "Do I have to pay for the website upfront?",
     answer:
@@ -811,8 +667,8 @@ export const faqItems: FaqItem[] = [
       "All of them. Plumbers, electricians, roofers, HVAC, painters, landscapers, handymen, general contractors, remodelers, and more.",
   },
   {
-    question: "How is this different from other marketing companies?",
+    question: "Who will I be working with?",
     answer:
-      "I've spent over a decade working in the trades myself. I'm not a marketing agency that learned your business from Google. I understand how contractors think, what a real lead looks like, and how to keep the whole thing simple.",
+      "You'll work directly with Matt, the founder. I bring more than a decade of trades experience and a Google UX Design Professional Certificate to the work. I handle your website and marketing, and I'm the person you contact when something needs updating.",
   },
 ];
