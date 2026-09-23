@@ -1,6 +1,9 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
 import { ImageResponse } from "next/og";
 
-import { hero, siteConfig } from "@/content/site";
+import { hero } from "@/content/site";
 
 export const alt = "Built for Pros contractor marketing hero preview";
 export const size = {
@@ -9,9 +12,42 @@ export const size = {
 };
 export const contentType = "image/png";
 
-const heroBackground = new URL("/hero-bg.jpg", siteConfig.url).toString();
+const canvas = "#09090b";
 
-export default function OpenGraphImage() {
+async function loadManrope(weight: 600 | 700) {
+  const css = await fetch(
+    `https://fonts.googleapis.com/css2?family=Manrope:wght@${weight}&display=swap`,
+    {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_8; de-at) AppleWebKit/533.21.1 (KHTML, like Gecko) Version/5.0.5 Safari/533.21.1",
+      },
+    },
+  ).then((response) => {
+    if (!response.ok) {
+      throw new Error(`Failed to load Manrope CSS (${response.status}).`);
+    }
+    return response.text();
+  });
+
+  const match = css.match(/src: url\((.+?)\) format\('(?:opentype|truetype)'\)/);
+  if (!match?.[1]) {
+    throw new Error("Manrope font file was not found.");
+  }
+
+  const fontResponse = await fetch(match[1]);
+  if (!fontResponse.ok) {
+    throw new Error(`Failed to load Manrope font (${fontResponse.status}).`);
+  }
+
+  return fontResponse.arrayBuffer();
+}
+
+export default async function OpenGraphImage() {
+  const [semibold, bold] = await Promise.all([loadManrope(600), loadManrope(700)]);
+  const background = await readFile(join(process.cwd(), "public/hero-bg.jpg"));
+  const heroBackground = `data:image/jpeg;base64,${background.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -21,55 +57,69 @@ export default function OpenGraphImage() {
           height: "100%",
           width: "100%",
           overflow: "hidden",
-          background: "#05080d",
-          color: "#ffffff",
-          alignItems: "center",
-          justifyContent: "center",
-          fontFamily: "Manrope, Arial, sans-serif",
+          background: canvas,
+          color: "#fafafa",
+          fontFamily: "Manrope",
         }}
       >
         <img
           src={heroBackground}
           alt=""
+          width={size.width}
+          height={size.height}
           style={{
             position: "absolute",
-            inset: 0,
-            height: "100%",
-            width: "100%",
+            top: 0,
+            left: 0,
+            width: size.width,
+            height: size.height,
             objectFit: "cover",
             objectPosition: "center",
-            opacity: 0.32,
           }}
         />
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
+            width: size.width,
+            height: size.height,
             display: "flex",
-            background:
-              "linear-gradient(90deg, #05080d 0%, rgba(5, 8, 13, 0.9) 42%, rgba(5, 8, 13, 0.52) 100%)",
+            background: "rgba(9, 9, 11, 0.64)",
           }}
         />
         <div
           style={{
             position: "absolute",
-            inset: 0,
+            top: 0,
+            left: 0,
+            width: size.width,
+            height: size.height,
             display: "flex",
-            background:
-              "linear-gradient(0deg, #05080d 0%, rgba(5, 8, 13, 0) 46%, rgba(5, 8, 13, 0.62) 100%)",
+            background: `linear-gradient(90deg, ${canvas} 0%, rgba(9, 9, 11, 0.88) 50%, rgba(9, 9, 11, 0.22) 100%)`,
           }}
         />
         <div
           style={{
             position: "absolute",
-            top: -160,
-            left: 160,
+            top: 0,
+            left: 0,
+            width: size.width,
+            height: size.height,
             display: "flex",
-            height: 420,
-            width: 880,
-            borderRadius: "999px",
+            background: `linear-gradient(180deg, rgba(9, 9, 11, 0.4) 0%, rgba(9, 9, 11, 0) 46%, ${canvas} 100%)`,
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            top: -80,
+            left: 200,
+            display: "flex",
+            height: 220,
+            width: 800,
             background:
-              "radial-gradient(ellipse at center, rgba(249, 99, 2, 0.16), rgba(249, 99, 2, 0) 68%)",
+              "radial-gradient(ellipse at center, rgba(249, 99, 2, 0.1), rgba(249, 99, 2, 0) 70%)",
           }}
         />
 
@@ -78,20 +128,24 @@ export default function OpenGraphImage() {
             position: "relative",
             display: "flex",
             width: "100%",
-            maxWidth: 1040,
+            height: "100%",
             flexDirection: "column",
             alignItems: "center",
-            padding: "0 64px",
+            justifyContent: "center",
             textAlign: "center",
+            padding: "0 72px",
           }}
         >
           <div
             style={{
-              marginBottom: 22,
               display: "flex",
-              fontSize: 16,
-              fontWeight: 700,
-              letterSpacing: "0.26em",
+              justifyContent: "center",
+              width: "100%",
+              marginBottom: 22,
+              fontSize: 15,
+              fontWeight: 600,
+              letterSpacing: "0.2em",
+              paddingLeft: "0.2em",
               textTransform: "uppercase",
               color: "#f96302",
             }}
@@ -102,55 +156,88 @@ export default function OpenGraphImage() {
           <div
             style={{
               display: "flex",
+              width: "100%",
               flexDirection: "column",
-              fontSize: 78,
-              fontWeight: 800,
-              letterSpacing: "-0.055em",
-              lineHeight: 0.98,
-              color: "#f8fafc",
+              alignItems: "center",
+              fontSize: 76,
+              fontWeight: 700,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.05,
+              color: "#fafafa",
             }}
           >
-            {hero.titleLines?.map((line) => <div key={line}>{line}</div>)}
+            {hero.titleLines.map((line) => (
+              <div
+                key={line}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                {line.split(/(marketing)/).map((part, index) =>
+                  part === "marketing" ? (
+                    <div
+                      key={`${line}-${index}`}
+                      style={{
+                        display: "flex",
+                        position: "relative",
+                        marginLeft: 18,
+                      }}
+                    >
+                      {part}
+                      <svg
+                        width="340"
+                        height="18"
+                        viewBox="0 0 320 14"
+                        style={{
+                          position: "absolute",
+                          left: 0,
+                          bottom: -2,
+                        }}
+                      >
+                        <path
+                          d="M 3 10 Q 155 1 317 7"
+                          stroke="#f96302"
+                          strokeWidth="6"
+                          strokeLinecap="round"
+                          fill="none"
+                        />
+                      </svg>
+                    </div>
+                  ) : (
+                    <div key={`${line}-${index}`} style={{ display: "flex" }}>
+                      {part}
+                    </div>
+                  ),
+                )}
+              </div>
+            ))}
           </div>
 
           <div
             style={{
-              marginTop: 28,
               display: "flex",
-              maxWidth: 760,
-              fontSize: 22,
+              width: 780,
+              marginTop: 28,
+              justifyContent: "center",
+              textAlign: "center",
+              fontSize: 24,
+              fontWeight: 600,
               lineHeight: 1.45,
-              color: "rgba(255, 255, 255, 0.72)",
+              color: "#a1a1aa",
             }}
           >
             {hero.description}
           </div>
-
-          <div
-            style={{
-              marginTop: 42,
-              display: "flex",
-              alignItems: "center",
-              gap: 18,
-              fontSize: 18,
-              fontWeight: 700,
-              color: "rgba(255, 255, 255, 0.82)",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                height: 10,
-                width: 10,
-                borderRadius: "999px",
-                background: "#f96302",
-              }}
-            />
-            {siteConfig.name}
-          </div>
         </div>
       </div>
     ),
-    size,
+    {
+      ...size,
+      fonts: [
+        { name: "Manrope", data: semibold, weight: 600, style: "normal" },
+        { name: "Manrope", data: bold, weight: 700, style: "normal" },
+      ],
+    },
   );
 }

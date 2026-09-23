@@ -34,7 +34,7 @@ export function createMetadata({
       type: "website",
       images: [
         {
-          url: "/opengraph-image",
+          url: "/opengraph-image?v=3",
           width: 1200,
           height: 630,
           alt: `${siteConfig.name} preview image`,
@@ -45,7 +45,7 @@ export function createMetadata({
       card: "summary_large_image",
       title: pageTitle,
       description,
-      images: ["/opengraph-image"],
+      images: ["/opengraph-image?v=3"],
     },
   };
 }
